@@ -1,0 +1,64 @@
+$AGCU
+$ -----------------------------------------------------------------------------
+$ 2007.2.19
+$ 
+$ TDB file created by K.Hashimoto and T.Abe,
+$
+$ Particle Simulation and Thermodynamics Group, National Institute for 
+$ Materials Science. 1-2-1 Sengen, Tsukuba, Ibaraki 305-0047, Japan
+$ 
+$ e-mail: abe.taichi@nims.go.jp
+$
+$ Copyright (C) NIMS 2007
+$ -----------------------------------------------------------------------------
+$
+$ The parameter set is taken from       (Cu-Ag-Pb)
+$ F.H. Hayes, H.L. Lukas, G. Effenberg, G. Petzow, Z. fur Metallkde, 77 (1986) 749-754.
+$
+$ -----------------------------------------------------------------------------
+$                
+ ELEMENT AG   FCC_A1                    1.0787E+02  5.7446E+03  4.2551E+01!
+ ELEMENT CU   FCC_A1                    6.3546E+01  5.0041E+03  3.3150E+01!
+$--------1---------2---------3---------4---------5---------6---------7---------8 
+$ this is 1991Dins
+$ Function GHSERAG    298.15  -7209.512+118.202013*T-23.8463314*T*LN(T)
+$   -.001790585*T**2-3.98587E-07*T**3-12011*T**(-1);          1234.93  Y
+$   -15095.252+190.266404*T-33.472*T*LN(T)+1.412E+29*T**(-9); 3000   N !
+$ Function GHSERCU    298.15  -7770.458+130.485235*T-24.112392*T*LN(T)
+$     -.00265684*T**2+1.29223E-07*T**3+52478*T**(-1);         1357.77  Y
+$     -13542.026+183.803828*T-31.38*T*LN(T)+3.642E+29*T**(-9); 3200  N !
+$ Function GAGLIQ     298.15
+$     +11025.086-8.891021*T-1.034E-20*T**7+GHSERAG;           1234.93  Y
+$     +11508.141-9.301747*T-1.412E+29*T**(-9)+GHSERAG;        3000  N  !
+$ Function GCULIQ     298.15
+$     +12964.736-9.511904*T-5.849E-21*T**7+GHSERCU;           1357.77  Y
+$     +13495.481-9.922344*T-3.642E+29*T**(-9)+GHSERCU;        3200  N  !
+
+ Function GHSERAG    298.15  -7209.5+118.200729*T-23.846329*T*LN(T)
+   -.0017906*T**2-3.98583E-07*T**3-12011*T**(-1);               3000 N !
+ Function GHSERCU    298.15  -7770.5+130.485396*T-24.112396*T*LN(T)
+     -.00265685*T**2+1.29223E-07*T**3+52477*T**(-1);            3200 N !
+ Function GAGLIQ     298.15
+     -3587.3+147.49269*T+33.472080*T-33.472080*T*LN(T);         3000 N !
+ Function GCULIQ     298.15
+     -47.0+142.50376*T+31.380005*T-31.380005*T*LN(T);           3200 N !
+
+ TYPE_DEFINITION % SEQ *!
+ DEFINE_SYSTEM_DEFAULT ELEMENT 2 !
+
+ PHASE LIQUID  %  1  1.0  !
+   CONSTITUENT LIQUID :AG,CU :  !
+   PARAMETER G(LIQUID,AG;0)     298.15   +GAGLIQ;           3000  N  !
+   PARAMETER G(LIQUID,CU;0)     298.15   +GCULIQ;           3200  N  !
+   PARAMETER G(LIQUID,AG,CU;0)  298.15  +17534.6-4.45479*T; 6000  N  !
+   PARAMETER G(LIQUID,AG,CU;1)  298.15  +2251.3-2.67330*T;  6000  N  !
+   PARAMETER G(LIQUID,AG,CU;2)  298.15  492.7;              6000  N  !
+
+ PHASE FCC_A1  %  1  1.0   !
+   CONSTITUENT FCC_A1  :AG,CU:  !
+   PARAMETER G(FCC_A1,AG;0)     298.15  +GHSERAG;           3000 N !
+   PARAMETER G(FCC_A1,CU;0)     298.15  +GHSERCU;           3200 N !
+   PARAMETER G(FCC_A1,AG,CU;0)  298.15  +33819.1-8.12360*T; 6000 N !
+   PARAMETER G(FCC_A1,AG,CU;1)  298.15  -5601.9+1.32997*T;  6000 N !
+$
+$AGCU-NIMS

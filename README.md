@@ -1,1 +1,1 @@
-# PSU-MatSE419
+#### This repository hosts a comprehensive Jupyter Notebook tutorial for using Pycalphad, a Python library for computational thermodynamics (https://pycalphad.org/). The tutorial covers the basics and advanced applications, including unary, binary, ternary phase diagram calculations and Scheil simulation. It's designed to be accessible for beginners, yet informative for advanced users seeking to explore the capabilities of Pycalphad in thermodynamic modeling.
